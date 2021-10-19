@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +16,14 @@ public class JDBCTest {
 	
 	JDBC jdbc = new JDBC();
 	static Statement stm;
+	static Connection conn;
 	
 	@BeforeAll
 	public static void setup() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			//connect to database
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "Yaswanth@1994");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "Yaswanth@1994");
 			//creating new statement
 			stm = conn.createStatement();
 		} catch (ClassNotFoundException e) {
@@ -32,6 +34,12 @@ public class JDBCTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@AfterAll
+	public static void tearDown() throws SQLException {
+		stm.close();
+		conn.close();
 	}
 	
 	@Test
