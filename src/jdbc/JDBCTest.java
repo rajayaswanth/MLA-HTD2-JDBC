@@ -40,6 +40,30 @@ public class JDBCTest {
 	}
 	
 	@Test
+	public void createTableTest() throws SQLException {
+		String response = jdbc.createTable(stm, "test");
+		assertEquals("created successfully", response);
+	}
+	
+	@Test
+	public void addPersonTest() throws SQLException {
+		String response = jdbc.addPerson(stm, 5L, "test", "AP");
+		assertEquals("added successfully", response);
+	}
+	
+	@Test
+	public void updatePersonTest() throws SQLException {
+		String response = jdbc.updatePerson(stm, 5L, "Test", "AP");
+		assertEquals("updated successfully", response);
+	}
+	
+	@Test
+	public void deletePersonTest() throws SQLException {
+		String response = jdbc.deletePerson(stm, 5L);
+		assertEquals("deleted successfully", response);
+	}
+	
+	@Test
 	public void getAllPersonsTest() throws SQLException {
 		String response = jdbc.getAllPersons(stm);
 		assertEquals("fetch data successfull", response);
